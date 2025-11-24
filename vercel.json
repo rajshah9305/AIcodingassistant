@@ -1,18 +1,11 @@
 {
-  "version": 2,
   "buildCommand": "npm run build",
   "outputDirectory": "dist/client",
   "installCommand": "npm install",
-  "framework": null,
   "rewrites": [
     {
       "source": "/api/trpc/(.*)",
       "destination": "/api/trpc/$1"
     }
-  ],
-  "functions": {
-    "api/**/*.ts": {
-      "runtime": "nodejs20.x"
-    }
-  }
+  ]
 }
