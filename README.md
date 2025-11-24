@@ -22,6 +22,7 @@ A fully functional AI-powered coding assistant using Groq's GPT-OSS-120B model. 
 ## Prerequisites
 
 - Node.js 18+
+- Python 3.8+ (for CLI assistant)
 - Groq API key ([Get one free at console.groq.com](https://console.groq.com))
 
 ## Quick Start
@@ -49,15 +50,31 @@ NODE_ENV=development
 
 ### 3. Run Development
 
+**Option A: Quick Start (macOS)**
+```bash
+./start.sh
+```
+
+**Option B: Manual Start**
 ```bash
 # Terminal 1 - Start backend
 npm run dev
 
 # Terminal 2 - Start frontend (in new terminal)
-npm run dev
+cd client && npm run dev
 ```
 
 Open [http://localhost:5173](http://localhost:5173)
+
+### 4. Run Python CLI Assistant (Optional)
+
+```bash
+# Install Python dependencies
+pip install -r requirements.txt
+
+# Run CLI assistant
+python code_assistant.py
+```
 
 ## Production Build
 
@@ -137,6 +154,8 @@ All endpoints are available via tRPC at `/api/trpc`:
 │   ├── context.ts         # tRPC context
 │   ├── trpc.ts            # tRPC setup
 │   └── openai.ts          # Groq client
+├── code_assistant.py      # Python CLI assistant
+├── requirements.txt       # Python dependencies
 ├── .env                   # Environment variables
 ├── package.json
 ├── tsconfig.json
