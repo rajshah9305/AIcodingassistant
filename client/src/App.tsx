@@ -9,12 +9,9 @@ import {
   Activity,
   Layers,
   Copy,
-  Command,
   Hash,
-  ChevronRight,
   Shield,
-  Maximize2,
-  Minimize2
+  Maximize2
 } from 'lucide-react';
 import { trpc } from '@/lib/trpc';
 
@@ -410,9 +407,9 @@ const RefactorView = () => {
           notify("MUTATION_SUCCESSFUL", "SUCCESS");
         }
       },
-      onError: (err: any) => {
+      onError: () => {
         setIsMutating(false);
-        notify(err.message || "MUTATION_FAILED", "ERROR");
+        notify("MUTATION_FAILED", "ERROR");
       },
     }
   );
@@ -568,9 +565,9 @@ const GenerateView = () => {
           notify("MANIFESTATION_COMPLETE", "SUCCESS");
         }
       },
-      onError: (err: any) => {
+      onError: () => {
         setIsGenerating(false);
-        notify(err.message || "Generation failed", "ERROR");
+        notify("Generation failed", "ERROR");
       },
     }
   );
@@ -686,7 +683,7 @@ const GenerateView = () => {
   );
 };
 
-const ChatHistory = ({ messages, isTyping }: { messages: ChatMessage[]; isTyping: boolean }) => {
+const ChatHistory = ({ messages, isTyping, currentMessage }: { messages: ChatMessage[]; isTyping: boolean; currentMessage: string }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -889,7 +886,7 @@ const App = () => {
           setIsTyping(false);
         }
       },
-      onError: (err: any) => {
+      onError: () => {
         setIsTyping(false);
         setPendingMessage('');
         notify("CONNECTION_LOST", "ERROR");
@@ -1017,7 +1014,7 @@ const App = () => {
                    {activeTab === 'ANALYZE' && <AnalyzeView />}
                    {activeTab === 'REFACTOR' && <RefactorView />}
                    {activeTab === 'GENERATE' && <GenerateView />}
-                   {activeTab === 'CHAT' && <ChatHistory messages={messages} isTyping={isTyping} />}
+                   {activeTab === 'CHAT' && <ChatHistory messages={messages} isTyping={isTyping} currentMessage={currentMessage} />}
                 </div>
              </div>
 
